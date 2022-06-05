@@ -1,0 +1,89 @@
+﻿@model Fitpedia.Models.Structure.Message
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="~/Media/Images/favicon.ico" />
+    <title>Fitpedia</title>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="/Register/Verify" autocomplete="off">
+            <h1 class="text-center">Registration Form</h1>
+            <br />
+            @if (Model != null)
+            {
+                if (Model.MessageText != null)
+                {
+                    if (!Model.MessageStatus)
+                    {
+                        <div class="alert alert-danger" role="alert">@Model.MessageText</div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success" role="alert">@Model.MessageText</div>
+                    }
+                }
+            }
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputUsername" name="Username" placeholder="Username" maxlength="15" required>
+                <label for="floatingInputUsername">Username</label>
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingInputPassword" name="Password" placeholder="Password" maxlength="15" required>
+                <label for="floatingInputPassword">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputName" name="FullName" placeholder="First Name" maxlength="200" required>
+                <label for="floatingInputName">Full Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInputHeight" name="Height" placeholder="Height" required min="130" max="200">
+                <label for="floatingInputHeight">Height</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="tel" class="form-control" id="floatingInputTelephone" name="Telephone" placeholder="Telephone" required>
+                <label for="floatingInputTelephone">Telephone</label>
+            </div>
+
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelectGender" name="Sex" aria-label="Floating label select example" required>
+                    <option value="" selected>Select your gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+                <label for="floatingSelectGender">Gender</label>
+            </div>
+            <br />
+            <div class="d-grid">
+                <input type="submit" class="btn btn-block btn-primary" value="Register" />
+            </div>
+            <br />
+            <p class="text-center">Already have an account? Continue to <a href="/Login/Index">SIGN IN</a></p>
+        </form>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+
+        $(function () {
+            $('#floatingInputUsername').on('keypress', function (e) {
+                if (e.which == 32) {
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

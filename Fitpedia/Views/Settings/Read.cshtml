@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    if (Model.MessageText != null)
+    {
+        if (!Model.MessageStatus)
+        {
+            <div class="alert alert-danger" role="alert">@Model.MessageText</div>
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">@Model.MessageText</div>
+        }
+    }
+}
+<form method="post" action="/Settings/ChangePassword">
+    <h3>Change Password</h3>
+    <label>Old Password</label>
+    <input type="password" class="form-control" required name="OldPassword" />
+    <label>New Password</label>
+    <input type="password" class="form-control" required name="NewPassword" />
+    <br />
+    <input type="submit" class="btn btn-primary" />
+</form>

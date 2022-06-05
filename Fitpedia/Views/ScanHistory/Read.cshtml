@@ -1,0 +1,57 @@
+﻿@model Fitpedia.Models.Structure.Message
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    if (Model.MessageText != null)
+    {
+        if (!Model.MessageStatus)
+        {
+            <div class="alert alert-danger" role="alert">@Model.MessageText</div>
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">@Model.MessageText</div>
+        }
+    }
+}
+<br />
+<div class="table-responsive">
+    <table id="tableData" class="table nowrap table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Weight</th>
+                <th>Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (dynamic value in ViewBag.ScanHistory)
+            {
+                <tr id="row-@value.activityid">
+                    <td data-order="@value.datetime.ToString("yyyyMMdd")">@value.datetime.ToString("dd-MMM-yyyy")</td>
+                    <td data-order="@value.datetime.ToString("HHmm")">@value.datetime.ToString("HH:mm")</td>
+                    <td>@value.weight</td>
+                    <td><button class="btn btn-danger" onclick="DeleteActivity(@value.activityid)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable();
+    });
+
+    function DeleteActivity(activityid) {
+        axios.get(window.location.origin + '/Ajax/DeleteActivity?id=' + activityid)
+            .then((resp) => {
+                document.getElementById("row-" + activityid).remove();
+            }).catch(e => {
+                alert(e);
+            })
+    }
+</script>

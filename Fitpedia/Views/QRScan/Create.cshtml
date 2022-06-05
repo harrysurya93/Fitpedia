@@ -1,0 +1,39 @@
+﻿@model Fitpedia.Models.Structure.Message
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    if (Model.MessageText != null)
+    {
+        if (!Model.MessageStatus)
+        {
+            <div class="alert alert-danger" role="alert">@Model.MessageText</div>
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">@Model.MessageText</div>
+        }
+    }
+}
+
+
+<center>
+    <div id="qr-reader"></div>
+</center>
+
+<form method="get" action="/QRScan/Scan" id="formScan">
+    <input type="hidden" name="deviceid" id="Code" />
+</form>
+<script>
+
+    function onScanSuccess(decodedText, decodedResult) {
+        document.getElementById("Code").value = decodedText;
+        document.getElementById("formScan").submit();
+    }
+
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+</script>

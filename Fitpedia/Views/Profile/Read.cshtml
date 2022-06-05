@@ -1,0 +1,44 @@
+﻿@model List<dynamic>
+@{
+    ViewBag.Title = "Read";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInputUsername" value="@Model[0].username" name="Username" placeholder="Username" maxlength="15" readonly>
+    <label for="floatingInputUsername">Username</label>
+</div>
+
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInputName" value="@Model[0].name" name="FullName" placeholder="Full Name" maxlength="200" readonly>
+    <label for="floatingInputName">Full Name</label>
+</div>
+
+<div class="form-floating mb-3">
+    <input type="number" class="form-control" id="floatingHeight" value="@Model[0].height" name="Height" placeholder="Telephone" readonly>
+    <label for="floatingHeight">Height</label>
+</div>
+
+<div class="form-floating mb-3">
+    <input type="tel" class="form-control" id="floatingInputTelephone" value="@Model[0].telephone" name="Telephone" placeholder="Telephone" readonly>
+    <label for="floatingInputTelephone">Telephone</label>
+</div>
+
+<div class="form-floating mb-3">
+    <select class="form-select" id="floatingSelectGender" name="Sex" aria-label="Floating label select example" disabled>
+        @if (Model[0].sex == "M")
+        {
+            <option value="M" selected>Male</option>
+        }
+        else
+        {
+            <option value="F" selected>Female</option>
+        }
+    </select>
+    <label for="floatingSelectGender">Gender</label>
+</div>
+
+<div class="form-floating mb-3">
+    <input type="tel" class="form-control" id="floatingInputMemberSince" value="@Model[0].createdate.ToString("dd MMMM yyyy")" name="createdate" placeholder="Member Since" readonly>
+    <label for="floatingInputMemberSince">Member Since</label>
+</div>

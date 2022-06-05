@@ -1,0 +1,36 @@
+﻿@model Fitpedia.Models.Structure.Message
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    if (Model.MessageText != null)
+    {
+        if (!Model.MessageStatus)
+        {
+            <div class="alert alert-danger" role="alert">@Model.MessageText</div>
+        }
+        else
+        {
+            <div class="alert alert-success" role="alert">@Model.MessageText</div>
+        }
+    }
+}
+
+<main>
+
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="~/Media/Images/Logo.png" alt="" width="144" height="114">
+        <h1 class="display-5 fw-bold">Fitpedia</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Quickly scan your body information and analyze it using our prediction AI, Helping you maintain your Body Mass Index (BMI) progressively. Start analyze by scanning to our nearest Fitpedia's scan machine.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="/QRScan/Create" class="btn btn-primary btn-lg px-4 gap-3"><i class="bi bi-upc-scan"></i> Start Scan</a>
+                <a href="/Analytics/Read" class="btn btn-outline-secondary btn-lg px-4"><i class="bi bi-graph-up"></i> Analytics</a>
+            </div>
+        </div>
+    </div>
+
+</main>

@@ -1,0 +1,103 @@
+﻿@model Fitpedia.Models.Structure.MachineLearningOutput
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>BMI</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Below 18.5</td>
+            <td>Underweight</td>
+        </tr>
+        <tr>
+            <td>18.5 - 24.9</td>
+            <td class="text-success">Normal Weight</td>
+        </tr>
+        <tr>
+            <td>25.0 - 29.9</td>
+            <td>Pre-obesity</td>
+        </tr>
+        <tr>
+            <td>30.0 - 34.9</td>
+            <td>Obesity Class I</td>
+        </tr>
+        <tr>
+            <td>35.0 - 39.9</td>
+            <td>Obesity Class II</td>
+        </tr>
+        <tr>
+            <td>Above 40.0</td>
+            <td>Obesity Class III</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>Weekly Body Mass Index Prediction</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Prediction</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Result.Forecast.Length; i++)
+        {
+
+            <tr>
+                <td>@ViewBag.LatestDate[0].value.AddDays(i + 1).ToString("dd-MM-yyyy")</td>
+                <td>@Math.Round(Model.Result.Forecast[i], 1)</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<p class="fst-italic m-0">RMSE : @Model.Evaluation.RMSE</p>
+<p class="fst-italic m-0">MAE : @Model.Evaluation.MAE</p>
+<br />
+<h4>History Graphic</h4>
+<canvas id="myChart"></canvas>
+<script>
+    var RawData = @Html.Raw(Json.Encode(ViewBag.RawData));
+
+    var labels = RawData.map(function (e) {
+        return e.datetime.toString('dd-MM-yy');
+    });
+    var data = RawData.map(function (e) {
+        return e.BMI;
+
+    });;
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'BMI Point',
+                data: data,
+                backgroundColor: [
+                    'rgba(0, 255, 0, 0.8)',
+                ],
+                borderColor: [
+                    'rgba(0, 255, 0, 0.8)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+

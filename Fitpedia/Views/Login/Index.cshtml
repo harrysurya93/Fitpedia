@@ -1,0 +1,57 @@
+﻿@model Fitpedia.Models.Structure.Message 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/Content/signin.css" />
+    <link rel="icon" type="image/png" href="~/Media/Images/favicon.ico"/>
+    <title>Fitpedia</title>
+</head>
+<body>    
+    <main class="form-signin">        
+        <form method="post" action="/Login/Verify" autocomplete="off">
+            <center>
+                <img class="mb-2 img-thumbnail border-0" width="300" height="300" src="~/Media/Images/Logo.png" alt="">
+            </center>
+            <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+
+            @if (Model != null)
+            {
+                if (Model.MessageText != null)
+                {
+                    if (!Model.MessageStatus)
+                    {
+                        <div class="alert alert-danger" role="alert">@Model.MessageText</div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success" role="alert">@Model.MessageText</div>
+                    }
+                }
+            }
+
+            <div class="form-floating">
+                <input type="text" class="form-control" name="Username" id="floatingInput" placeholder="Username">
+                <label for="floatingInput">Username</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="password" class="form-control" name="Password" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <br />
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <br />
+            <p class="text-center mt-3">Don't have account yet? Join us here <a href="/Register/Create">REGISTER</a></p>
+            <p class="mt-2 mb-3 text-center text-muted">Thesis of Harry Surya @@Binus University 2021</p>
+        </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
