@@ -13,7 +13,7 @@ namespace Fitpedia.Models
         private static readonly string server = "localhost";
         private static readonly string database = "fitpedia";
         private static readonly string uid = "root";
-        private static readonly string password = "P@ssw0rdB1Admin";
+        private static readonly string password = "";
         private static readonly string connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
         private static MySqlConnection connection = new MySqlConnection(connectionString);
         public static string ExecuteEditQuery(string query)
